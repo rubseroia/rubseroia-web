@@ -1,0 +1,66 @@
+name: Deploy RubseroIA to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Minify CSS
+        run: |
+          npm install -g clean-css-cli
+          cleancss -o dist/assets/css/main.min.css src/assets/css/main.css || cp src/assets/css/main.css dist/assets/css/main.min.css
+
+      - name: Minify JS
+        run: |
+          npm install -g terser
+          terser src/assets/js/main.js -o dist/assets/js/main.min.js || cp src/assets/js/main.js dist/assets/js/main.min.js
+          terser src/assets/js/analytics.js -o dist/assets/js/analytics.min.js || cp src/assets/js/analytics.js dist/assets/js/analytics.min.js
+
+      - name: Copy static files
+        run: |
+          mkdir -p dist
+          cp src/index.html dist/
+          cp src/404.html dist/
+          cp src/sitemap.xml dist/
+          cp src/robots.txt dist/
+          cp src/manifest.json dist/
+          cp -r src/privacidad dist/ || true
+          cp -r src/blog dist/ || true
+          cp -r src/casos-exito dist/ || true
+          cp -r src/assets/img dist/assets/ || true
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

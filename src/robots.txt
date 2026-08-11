@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /tmp/
+Disallow: /cgi-bin/
+
+# Sitemap
+Sitemap: https://rubseroIA.com/sitemap.xml
+
+# Crawl-delay para bots agresivos (opcional)
+# Crawl-delay: 10

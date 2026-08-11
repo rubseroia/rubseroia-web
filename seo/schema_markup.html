@@ -1,0 +1,233 @@
+<!-- =========================================================
+     SCHEMA MARKUP JSON-LD — RubseroIA
+     Pega TODO este bloque justo ANTES de cerrar </body>
+     o dentro del <head>. Google recomienda antes de </body>.
+     ========================================================= -->
+
+<!-- ===== SCHEMA: ORGANIZACIÓN ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "RubseroIA",
+  "url": "https://rubseroIA.com",
+  "logo": "https://rubseroIA.com/img/logo.png",
+  "description": "Consultoría e implementación de inteligencia artificial para empresas en España. Chatbots, automatización, análisis de datos y generación de contenido con IA.",
+  "foundingDate": "2025",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Valencia",
+    "addressRegion": "Valencia",
+    "addressCountry": "ES"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+34-633-571156",
+    "contactType": "customer service",
+    "availableLanguage": ["Spanish"],
+    "areaServed": "ES"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/rubseroia",
+    "https://twitter.com/rubseroia"
+  ]
+}
+</script>
+
+<!-- ===== SCHEMA: SERVICIOS (Service) ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Consultoría e Implementación de Inteligencia Artificial",
+  "provider": {
+    "@type": "Organization",
+    "name": "RubseroIA",
+    "url": "https://rubseroIA.com"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "España"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios de IA para Empresas",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Chatbot con IA 24/7",
+          "description": "Responde consultas, reservas y dudas en cualquier momento sin coste extra en personal."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Análisis de datos con IA",
+          "description": "Convierte números en decisiones con dashboards que cualquiera puede entender."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Automatización de tareas",
+          "description": "Elimina el trabajo repetitivo: facturas, correos, informes. La IA trabaja, tú decides."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Generación de contenido con IA",
+          "description": "Posts, newsletters y fichas de producto de calidad en minutos."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "IA para RRHH y selección",
+          "description": "Filtra CVs, agenda entrevistas y evalúa candidatos. Contrata mejor en menos tiempo."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Estrategia de IA a medida",
+          "description": "Análisis de tu negocio y diseño del plan de IA que más valor te aporta."
+        }
+      }
+    ]
+  }
+}
+</script>
+
+<!-- ===== SCHEMA: FAQ PAGE ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Necesito conocimientos técnicos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, en absoluto. Diseñamos todas las soluciones para usuarios no técnicos. Nos encargamos de todo y te formamos para que puedas gestionarlo sin problema."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto tiempo tarda en estar funcionando?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La mayoría de soluciones están operativas en 1 a 3 semanas. Proyectos complejos pueden llevar hasta 6 semanas. Te damos un plazo real desde el primer día."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Funciona con las herramientas que ya uso?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Integramos con WhatsApp, Shopify, WordPress, Salesforce, HubSpot, Google Workspace, Microsoft 365 y muchas más. Analizamos tu stack antes de empezar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Mis datos están seguros?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Cumplimos con el RGPD. Todos los datos se procesan en servidores europeos y firmamos un contrato de confidencialidad en cada proyecto."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Hay permanencia mínima?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Puedes cancelar en cualquier momento con 30 días de aviso. Confiamos en nuestro trabajo, no en los contratos."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ===== SCHEMA: REVIEWS / TESTIMONIOS (AggregateRating) ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "RubseroIA",
+  "image": "https://rubseroIA.com/img/logo.png",
+  "url": "https://rubseroIA.com",
+  "telephone": "+34-633-571156",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Valencia",
+    "addressRegion": "Valencia",
+    "addressCountry": "ES"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "3",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "priceRange": "€€",
+  "openingHours": "Mo-Fr 09:00-18:00"
+}
+</script>
+
+<!-- ===== SCHEMA: HOWTO (Proceso de 4 pasos) ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Cómo implementar IA en tu empresa con RubseroIA",
+  "description": "Proceso de 4 pasos para integrar inteligencia artificial en tu negocio sin necesidad de conocimientos técnicos.",
+  "totalTime": "PT3W",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Consulta gratis",
+      "text": "Entendemos tu negocio y tus retos. Sin compromisos ni tecnicismos.",
+      "url": "https://rubseroIA.com/#proceso"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Propuesta clara",
+      "text": "Plan con costes exactos, tiempos y resultados esperados. Sin letra pequeña.",
+      "url": "https://rubseroIA.com/#proceso"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Implementación",
+      "text": "Integramos la IA en tus herramientas actuales. Tú solo tienes que aprobar.",
+      "url": "https://rubseroIA.com/#proceso"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Soporte continuo",
+      "text": "Te enseñamos a sacarle partido y estamos contigo en todo momento.",
+      "url": "https://rubseroIA.com/#proceso"
+    }
+  ]
+}
+</script>
+
+<!-- =========================================================
+     INSTRUCCIONES DE INSTALACIÓN:
+     1. Copia TODO este bloque
+     2. Pégalo justo ANTES de cerrar </body>
+     3. Valida con: https://validator.schema.org/
+     4. También puedes probar en: https://search.google.com/test/rich-results
+     ========================================================= -->

@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== PRECONNECT (acelera carga de fuentes) ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- ===== FUENTES ===== -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- ===== META SEO ESENCIALES ===== -->
+<title>RubseroIA — Consultoría e Implementación de IA para Empresas | Valencia, España</title>
+<meta name="description" content="Implementamos inteligencia artificial en tu empresa: chatbots 24/7, automatización, análisis de datos y generación de contenido. Sin tecnicismos. Resultados desde el primer mes. Consulta gratis.">
+<meta name="keywords" content="consultoría IA España, inteligencia artificial empresas, chatbot IA, automatización negocios, IA Valencia, implementación IA pymes">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://rubseroIA.com/">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+<!-- ===== OPEN GRAPH (Facebook, LinkedIn, WhatsApp) ===== -->
+<meta property="og:title" content="RubseroIA — IA para tu Negocio, sin complicaciones">
+<meta property="og:description" content="Chatbots, automatización y análisis de datos con IA. Resultados desde el primer mes. Atendemos toda España.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rubseroIA.com/">
+<meta property="og:image" content="https://rubseroIA.com/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="RubseroIA">
+
+<!-- ===== TWITTER CARDS ===== -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="RubseroIA — IA para tu Negocio">
+<meta name="twitter:description" content="Implementamos IA en empresas españolas. Chatbots, automatización y análisis de datos. Consulta gratuita.">
+<meta name="twitter:image" content="https://rubseroIA.com/img/og-image.jpg">
+
+<!-- ===== META ADICIONALES ===== -->
+<meta name="author" content="RubseroIA">
+<meta name="theme-color" content="#04060F">
+<meta name="geo.region" content="ES-VC">
+<meta name="geo.placename" content="Valencia, España">
+<meta name="geo.position" content="39.4699;-0.3763">
+<meta name="ICBM" content="39.4699, -0.3763">
+
+<!-- ===== MANIFEST (PWA) ===== -->
+<link rel="manifest" href="/manifest.json">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04060F;--bg2:#080D1C;
+  --g1:#01FFC2;--g2:#7B3FFF;--g3:#FF2D6B;
+  --text:#E8EEFF;--text2:#6B7FAA;--text3:#2E3A58;
+  --border:rgba(255,255,255,0.07);--card:rgba(255,255,255,0.035);--r:20px;
+}
+html{scroll-behavior:smooth}
+::selection{background:rgba(1,255,194,.15);color:var(--g1)}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none}
+#cursor{position:fixed;width:12px;height:12px;background:var(--g1);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .2s,height .2s}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(1,255,194,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .15s,height .15s}
+/* CURSOR: desactivado en dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+  body{cursor:auto!important}
+  #cursor,#cursor-ring{display:none!important}
+}
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+.gridlines{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(1,255,194,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(1,255,194,.018) 1px,transparent 1px);
+  background-size:80px 80px}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:.9rem 3rem;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(4,6,15,.8);backdrop-filter:blur(30px) saturate(1.8);
+  border-bottom:1px solid var(--border)}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo-mark{width:36px;height:36px;flex-shrink:0}
+.logo-text{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.35rem;color:var(--text);letter-spacing:-.01em}
+.logo-text em{color:var(--g1);font-style:normal}
+.nav-links{display:flex;gap:2.2rem;list-style:none;align-items:center}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:.83rem;font-weight:400;letter-spacing:.02em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-pill{background:transparent;border:1px solid rgba(1,255,194,.35);color:var(--g1)!important;
+  padding:.45rem 1.3rem;border-radius:100px;font-size:.78rem!important;letter-spacing:.04em!important;transition:all .25s!important}
+.nav-pill:hover{background:rgba(1,255,194,.08)!important;color:var(--g1)!important}
+.hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px}
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:8rem 2rem 5rem;position:relative;z-index:1;overflow:hidden}
+.hero-inner{max-width:1000px;width:100%}
+.blob{position:absolute;border-radius:50%;pointer-events:none;filter:blur(90px)}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:2.5rem;
+  font-family:'Space Mono',monospace;font-size:.7rem;color:var(--g1);
+  letter-spacing:.15em;text-transform:uppercase;padding:.4rem 1rem;
+  border:1px solid rgba(1,255,194,.2);border-radius:100px;background:rgba(1,255,194,.04)}
+.eyebrow-dot{width:6px;height:6px;background:var(--g1);border-radius:50%;animation:blink 1.4s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero h1{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;
+  font-size:clamp(3rem,8.5vw,7rem);line-height:.98;letter-spacing:-.04em;margin-bottom:2rem}
+.h1-line{display:block;overflow:hidden}
+.h1-line span{display:block;animation:slideUp .75s cubic-bezier(.16,1,.3,1) both}
+.h1-line:nth-child(1) span{animation-delay:.05s}
+.h1-line:nth-child(2) span{animation-delay:.17s}
+.h1-line:nth-child(3) span{animation-delay:.29s}
+@keyframes slideUp{from{transform:translateY(110%);opacity:0}to{transform:translateY(0);opacity:1}}
+.h1-accent{background:linear-gradient(90deg,var(--g1) 0%,#00C9FF 50%,var(--g2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  background-size:200%;animation:gradShift 4s ease-in-out infinite alternate}
+@keyframes gradShift{from{background-position:0%}to{background-position:100%}}
+.hero-sub{color:var(--text2);font-size:clamp(.95rem,1.8vw,1.15rem);
+  max-width:520px;margin:0 auto 3rem;line-height:1.75;font-weight:300;
+  animation:fadeIn .7s ease .42s both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeIn .7s ease .54s both}
+.cta-main{display:inline-flex;align-items:center;gap:10px;background:var(--g1);color:#04060F;
+  padding:.9rem 2.2rem;border-radius:100px;font-weight:700;font-size:.95rem;text-decoration:none;
+  position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.cta-main::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
+  transform:translateX(-100%);transition:transform .5s}
+.cta-main:hover::before{transform:translateX(100%)}
+.cta-main:hover{transform:translateY(-3px);box-shadow:0 0 45px rgba(1,255,194,.35)}
+.cta-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);color:var(--text);
+  padding:.9rem 2.2rem;border-radius:100px;font-weight:400;font-size:.95rem;text-decoration:none;transition:border-color .2s,background .2s}
+.cta-ghost:hover{border-color:rgba(255,255,255,.2);background:var(--card)}
+/* MARQUEE */
+.marquee-wrap{position:relative;z-index:1;padding:1.4rem 0;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  overflow:hidden;background:rgba(255,255,255,.012)}
+.mq-track{display:flex;gap:3.5rem;white-space:nowrap;animation:marquee 22s linear infinite;width:max-content}
+.mq-track:hover{animation-play-state:paused}
+.mq-item{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.88rem;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--text3);
+  display:flex;align-items:center;gap:.9rem;flex-shrink:0}
+.mq-dot{width:4px;height:4px;background:var(--g1);border-radius:50%;opacity:.5}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* LAYOUT */
+section{padding:7rem 2rem;position:relative;z-index:1}
+.container{max-width:1160px;margin:0 auto}
+.tag{display:inline-flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;
+  font-size:.68rem;font-weight:700;color:var(--g1);letter-spacing:.14em;text-transform:uppercase;margin-bottom:1rem}
+.tag-line{width:24px;height:1px;background:var(--g1)}
+.sec-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;
+  font-size:clamp(2rem,4.5vw,3.2rem);line-height:1.1;letter-spacing:-.025em;margin-bottom:1rem}
+.sec-sub{color:var(--text2);font-size:1rem;max-width:480px;line-height:1.7;font-weight:300}
+/* SERVICES */
+.services-layout{display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:start;margin-top:4rem}
+.services-sticky{position:sticky;top:7rem}
+.services-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.svc{background:var(--bg);padding:2rem;transition:background .3s;cursor:default;position:relative;overflow:hidden}
+.svc::after{content:'';position:absolute;inset:0;opacity:0;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(1,255,194,.07),transparent 65%);
+  transition:opacity .3s}
+.svc:hover::after{opacity:1}
+.svc:hover{background:rgba(1,255,194,.02)}
+.svc-ico{font-size:1.6rem;margin-bottom:1.2rem;display:block}
+.svc h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:.5rem}
+.svc p{color:var(--text2);font-size:.875rem;line-height:1.65;font-weight:300}
+.svc-num{position:absolute;top:.8rem;right:1rem;font-family:'Space Mono',monospace;font-size:.62rem;color:var(--text3)}
+/* PROCESS */
+.proc-bg{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-top:3.5rem}
+.pstep{padding:2rem 1.5rem;background:var(--bg2);border-right:1px solid var(--border)}
+.pstep:last-child{border-right:none}
+.pstep-n{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--g1);
+  letter-spacing:.1em;margin-bottom:1.5rem;display:flex;align-items:center;gap:8px}
+.pstep-n::after{content:'';flex:1;height:1px;background:var(--border)}
+.pstep h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1rem;margin-bottom:.5rem}
+.pstep p{color:var(--text2);font-size:.83rem;line-height:1.6;font-weight:300}
+.pstep-icon{font-size:1.3rem;margin-bottom:.9rem}
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-top:3.5rem}
+.stat-box{background:var(--bg);padding:2.5rem 1.5rem;text-align:center}
+.stat-n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:2.9rem;
+  letter-spacing:-.04em;line-height:1;
+  background:linear-gradient(135deg,var(--g1),#00C9FF);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.4rem}
+.stat-l{color:var(--text2);font-size:.83rem;font-weight:300;line-height:1.4}
+/* TESTIMONIALS */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+.tcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:2rem;transition:border-color .3s,transform .3s;position:relative;overflow:hidden}
+.tcard::before{content:'"';position:absolute;top:-1.2rem;left:1.2rem;
+  font-family:'Bricolage Grotesque',sans-serif;font-size:8rem;color:rgba(1,255,194,.055);line-height:1;pointer-events:none}
+.tcard:hover{border-color:rgba(1,255,194,.18);transform:translateY(-5px)}
+.tcard-stars{color:var(--g1);font-size:.78rem;letter-spacing:2px;margin-bottom:1rem}
+.tcard-text{color:var(--text2);font-size:.9rem;line-height:1.7;font-style:italic;font-weight:300;margin-bottom:1.5rem}
+.tcard-author{display:flex;align-items:center;gap:12px}
+.tcard-av{width:38px;height:38px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.8rem;color:#04060F}
+.tcard-name{font-weight:500;font-size:.88rem}
+.tcard-role{color:var(--text3);font-size:.75rem;margin-top:1px}
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+.plan{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:2.2rem;position:relative}
+.plan.hot{border-color:rgba(1,255,194,.3);background:rgba(1,255,194,.02)}
+.plan-chip{display:inline-block;background:var(--g1);color:#04060F;
+  font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;
+  letter-spacing:.08em;padding:.3rem .8rem;border-radius:100px;margin-bottom:1.2rem;text-transform:uppercase}
+.plan-name{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.3rem;margin-bottom:.3rem}
+.plan-desc{color:var(--text2);font-size:.83rem;font-weight:300;margin-bottom:1.8rem;line-height:1.5}
+.plan-price{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;
+  font-size:2.8rem;letter-spacing:-.03em;line-height:1;margin-bottom:.3rem}
+.plan-price sub{font-size:1rem;font-weight:400;color:var(--text2);vertical-align:middle}
+.plan-freq{color:var(--text3);font-size:.78rem;margin-bottom:2rem}
+.plan-feats{list-style:none;margin-bottom:2rem;display:flex;flex-direction:column;gap:.7rem}
+.plan-feats li{display:flex;align-items:flex-start;gap:10px;font-size:.87rem;color:var(--text2);line-height:1.5}
+.fc{color:var(--g1);font-size:.9rem;flex-shrink:0;margin-top:1px}
+.plan-btn{display:block;text-align:center;border-radius:100px;font-weight:600;font-size:.9rem;
+  text-decoration:none;padding:.85rem;transition:all .2s;cursor:pointer;border:none;font-family:'Inter',sans-serif}
+.plan-btn.main{background:var(--g1);color:#04060F}
+.plan-btn.main:hover{opacity:.85;transform:translateY(-2px)}
+.plan-btn.out{border:1px solid var(--border);color:var(--text);background:transparent}
+.plan-btn.out:hover{border-color:rgba(255,255,255,.2);background:var(--card)}
+/* FAQ */
+.faq-wrap{max-width:780px;margin:3.5rem auto 0;border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.faq-row{border-bottom:1px solid var(--border)}
+.faq-row:last-child{border-bottom:none}
+.faq-q{width:100%;background:var(--card);border:none;color:var(--text);
+  font-family:'Inter',sans-serif;font-size:.97rem;font-weight:400;
+  text-align:left;padding:1.4rem 1.8rem;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;transition:background .2s}
+.faq-q:hover{background:rgba(255,255,255,.04)}
+.faq-ico{flex-shrink:0;color:var(--text3);font-size:1.3rem;transition:transform .35s,color .2s;line-height:1}
+.faq-row.open .faq-ico{transform:rotate(45deg);color:var(--g1)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.4,0,.2,1)}
+.faq-row.open .faq-a{max-height:260px}
+.faq-ai{padding:.2rem 1.8rem 1.5rem;color:var(--text2);font-size:.9rem;line-height:1.75;font-weight:300;background:rgba(1,255,194,.015)}
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:4rem;align-items:start;margin-top:3.5rem}
+.contact-left h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;
+  font-size:2.2rem;line-height:1.15;letter-spacing:-.02em;margin-bottom:1rem}
+.contact-left p{color:var(--text2);font-weight:300;line-height:1.75;margin-bottom:2.2rem;font-size:.95rem}
+.cinfo{display:flex;align-items:center;gap:12px;color:var(--text2);font-size:.88rem;margin-bottom:.9rem}
+.cinfo-ico{width:32px;height:32px;background:rgba(1,255,194,.08);border:1px solid rgba(1,255,194,.15);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+.cinfo strong{color:var(--text);font-weight:500}
+.contact-form{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:2.2rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fg{margin-bottom:1.1rem}
+.fg label{display:block;font-size:.72rem;color:var(--text3);margin-bottom:.4rem;
+  font-family:'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase}
+.fg input,.fg select,.fg textarea{
+  width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);
+  border-radius:10px;color:var(--text);font-family:'Inter',sans-serif;
+  font-size:.92rem;padding:.75rem 1rem;outline:none;transition:border-color .2s,box-shadow .2s}
+.fg input:focus,.fg select:focus,.fg textarea:focus{
+  border-color:rgba(1,255,194,.4);box-shadow:0 0 0 3px rgba(1,255,194,.06)}
+.fg textarea{resize:vertical;min-height:90px}
+.fg select option{background:var(--bg2);color:var(--text)}
+.submit-btn{width:100%;background:var(--g1);color:#04060F;border:none;border-radius:100px;
+  font-family:'Inter',sans-serif;font-weight:700;font-size:.97rem;
+  padding:.9rem;cursor:pointer;transition:all .25s;margin-top:.3rem}
+.submit-btn:hover{opacity:.88;transform:translateY(-2px);box-shadow:0 8px 32px rgba(1,255,194,.28)}
+.submit-btn:disabled{opacity:.45;transform:none;cursor:not-allowed}
+.form-ok{display:none;margin-top:1rem;padding:1rem;border-radius:10px;
+  background:rgba(1,255,194,.07);border:1px solid rgba(1,255,194,.2);
+  color:var(--g1);font-size:.88rem;text-align:center}
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2.5rem 2rem;position:relative;z-index:1}
+.footer-inner{max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.3rem}
+.footer-logo em{color:var(--g1);font-style:normal}
+.footer-links{display:flex;gap:2rem;list-style:none}
+.footer-links a{color:var(--text3);text-decoration:none;font-size:.73rem;letter-spacing:.04em;text-transform:uppercase;transition:color .2s}
+.footer-links a:hover{color:var(--text2)}
+.footer-copy{color:var(--text3);font-family:'Space Mono',monospace;font-size:.66rem}
+/* REVEAL */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:translateY(0)}
+.rv-d1{transition-delay:.09s}.rv-d2{transition-delay:.18s}.rv-d3{transition-delay:.27s}
+/* RESPONSIVE */
+@media(max-width:960px){
+  .services-layout{grid-template-columns:1fr}
+  .services-sticky{position:static}
+  .process-steps{grid-template-columns:1fr 1fr}
+  .testi-grid{grid-template-columns:1fr 1fr}
+  .pricing-grid{grid-template-columns:1fr}
+}
+@media(max-width:820px){
+  nav{padding:.9rem 1.5rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+}
+@media(max-width:640px){
+  .stats-row{grid-template-columns:1fr 1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .process-steps{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr;gap:2rem}
+  .form-row{grid-template-columns:1fr}
+  section{padding:5rem 1.2rem}
+  .hero{padding:7rem 1.2rem 4rem}
+}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="bg-canvas"></canvas>
+<div class="gridlines"></div>
+
+<!-- NAV -->
+<nav aria-label="Navegación principal">
+  <a href="#" class="logo" aria-label="RubseroIA — Inicio">
+    <div class="logo-mark" role="img" aria-label="Logo RubseroIA">
+      <svg viewBox="0 0 36 36" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="18,2 34,10 34,26 18,34 2,26 2,10" stroke="#01FFC2" stroke-width="1.5" fill="rgba(1,255,194,.06)"/>
+        <circle cx="18" cy="18" r="3.5" fill="#01FFC2"/>
+        <line x1="18" y1="6" x2="18" y2="14.5" stroke="#01FFC2" stroke-width="1.5"/>
+        <line x1="18" y1="21.5" x2="18" y2="30" stroke="#01FFC2" stroke-width="1.5" opacity=".4"/>
+        <line x1="7.5" y1="12" x2="14.5" y2="16" stroke="#01FFC2" stroke-width="1.5" opacity=".6"/>
+        <line x1="21.5" y1="20" x2="28.5" y2="24" stroke="#01FFC2" stroke-width="1.5" opacity=".4"/>
+        <line x1="7.5" y1="24" x2="14.5" y2="20" stroke="#01FFC2" stroke-width="1.5" opacity=".4"/>
+        <line x1="21.5" y1="16" x2="28.5" y2="12" stroke="#01FFC2" stroke-width="1.5" opacity=".6"/>
+      </svg>
+    </div>
+    <span class="logo-text">Rubsero<em>IA</em></span>
+  </a>
+  <ul class="nav-links" id="nav-ul">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#resultados">Resultados</a></li>
+    <li><a href="#precios">Precios</a></li>
+    <li><a href="#contacto" class="nav-pill">Consulta gratis</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleNav()" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="nav-ul">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" aria-label="Hero principal">
+  <div class="blob" style="top:-120px;left:-180px;width:700px;height:600px;background:radial-gradient(circle,rgba(123,63,255,.12),transparent 65%);opacity:.7"></div>
+  <div class="blob" style="top:8%;right:-220px;width:600px;height:500px;background:radial-gradient(circle,rgba(1,255,194,.07),transparent 65%)"></div>
+  <div class="blob" style="bottom:-50px;left:18%;width:500px;height:320px;background:radial-gradient(ellipse,rgba(255,45,107,.05),transparent 65%)"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><span class="eyebrow-dot"></span> IA para negocios · España</div>
+    <h1>
+      <span class="h1-line"><span>Tu negocio</span></span>
+      <span class="h1-line"><span class="h1-accent">potenciado</span></span>
+      <span class="h1-line"><span>con IA real</span></span>
+    </h1>
+    <p class="hero-sub">Implementamos inteligencia artificial en tu empresa de forma sencilla, sin tecnicismos y con resultados desde el primer mes.</p>
+    <div class="hero-ctas">
+      <a href="#contacto" class="cta-main" aria-label="Solicitar consulta gratuita">
+        Consulta gratuita
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#servicios" class="cta-ghost" aria-label="Ver nuestros servicios de IA">Ver qué hacemos</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap" aria-label="Sectores que atendemos">
+  <div class="mq-track" id="mqt">
+    <span class="mq-item">Clínicas &amp; Salud<span class="mq-dot"></span></span>
+    <span class="mq-item">E-commerce<span class="mq-dot"></span></span>
+    <span class="mq-item">Inmobiliarias<span class="mq-dot"></span></span>
+    <span class="mq-item">Hostelería<span class="mq-dot"></span></span>
+    <span class="mq-item">Despachos jurídicos<span class="mq-dot"></span></span>
+    <span class="mq-item">Distribuidoras<span class="mq-dot"></span></span>
+    <span class="mq-item">RRHH &amp; Selección<span class="mq-dot"></span></span>
+    <span class="mq-item">Retail<span class="mq-dot"></span></span>
+    <span class="mq-item">Marketing<span class="mq-dot"></span></span>
+    <span class="mq-item">Logística<span class="mq-dot"></span></span>
+    <span class="mq-item">Clínicas &amp; Salud<span class="mq-dot"></span></span>
+    <span class="mq-item">E-commerce<span class="mq-dot"></span></span>
+    <span class="mq-item">Inmobiliarias<span class="mq-dot"></span></span>
+    <span class="mq-item">Hostelería<span class="mq-dot"></span></span>
+    <span class="mq-item">Despachos jurídicos<span class="mq-dot"></span></span>
+    <span class="mq-item">Distribuidoras<span class="mq-dot"></span></span>
+    <span class="mq-item">RRHH &amp; Selección<span class="mq-dot"></span></span>
+    <span class="mq-item">Retail<span class="mq-dot"></span></span>
+    <span class="mq-item">Marketing<span class="mq-dot"></span></span>
+    <span class="mq-item">Logística<span class="mq-dot"></span></span>
+  </div>
+</div>
+
+<!-- SERVICIOS -->
+<section id="servicios" aria-labelledby="servicios-titulo">
+  <div class="container">
+    <div class="services-layout">
+      <div class="services-sticky rv">
+        <div class="tag"><span class="tag-line"></span>Servicios</div>
+        <h2 class="sec-title" id="servicios-titulo">¿Qué podemos hacer por tu empresa?</h2>
+        <p class="sec-sub" style="margin-bottom:2rem">Soluciones prácticas que se integran en tu día a día desde el primer momento.</p>
+        <a href="#contacto" class="cta-main" style="display:inline-flex;font-size:.88rem;padding:.75rem 1.6rem" aria-label="Contactar con RubseroIA">Hablar con nosotros →</a>
+      </div>
+      <div class="services-grid rv rv-d1">
+        <article class="svc" aria-labelledby="svc-01"><span class="svc-num">01</span><span class="svc-ico" aria-hidden="true">🤖</span><h3 id="svc-01">Chatbot con IA 24/7</h3><p>Responde consultas, reservas y dudas en cualquier momento. Sin coste extra en personal.</p></article>
+        <article class="svc" aria-labelledby="svc-02"><span class="svc-num">02</span><span class="svc-ico" aria-hidden="true">📊</span><h3 id="svc-02">Análisis de datos</h3><p>Convierte números en decisiones. Dashboards que cualquiera puede entender.</p></article>
+        <article class="svc" aria-labelledby="svc-03"><span class="svc-num">03</span><span class="svc-ico" aria-hidden="true">⚙️</span><h3 id="svc-03">Automatización</h3><p>Elimina el trabajo repetitivo: facturas, correos, informes. La IA trabaja, tú decides.</p></article>
+        <article class="svc" aria-labelledby="svc-04"><span class="svc-num">04</span><span class="svc-ico" aria-hidden="true">✍️</span><h3 id="svc-04">Generación de contenido</h3><p>Posts, newsletters y fichas de producto. Contenido de calidad en minutos.</p></article>
+        <article class="svc" aria-labelledby="svc-05"><span class="svc-num">05</span><span class="svc-ico" aria-hidden="true">🔍</span><h3 id="svc-05">IA para RRHH</h3><p>Filtra CVs, agenda entrevistas y evalúa candidatos. Contrata mejor en menos tiempo.</p></article>
+        <article class="svc" aria-labelledby="svc-06"><span class="svc-num">06</span><span class="svc-ico" aria-hidden="true">🎯</span><h3 id="svc-06">Estrategia a medida</h3><p>Analizamos tu negocio y diseñamos el plan de IA que más valor te aporta. Gratis.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso" class="proc-bg" aria-labelledby="proceso-titulo">
+  <div class="container">
+    <div class="rv" style="text-align:center">
+      <div class="tag" style="justify-content:center"><span class="tag-line"></span>Proceso<span class="tag-line"></span></div>
+      <h2 class="sec-title" id="proceso-titulo" style="text-align:center">Tan fácil como 1-2-3-4</h2>
+      <p class="sec-sub" style="margin:0 auto;text-align:center">No necesitas saber de tecnología. Nosotros lo hacemos todo.</p>
+    </div>
+    <div class="process-steps rv rv-d1">
+      <article class="pstep" aria-labelledby="pstep-01">
+        <div class="pstep-n" id="pstep-01">Paso — 01</div>
+        <div class="pstep-icon" aria-hidden="true">💬</div>
+        <h3>Consulta gratis</h3>
+        <p>Entendemos tu negocio y tus retos. Sin compromisos ni tecnicismos.</p>
+      </article>
+      <article class="pstep" aria-labelledby="pstep-02">
+        <div class="pstep-n" id="pstep-02">Paso — 02</div>
+        <div class="pstep-icon" aria-hidden="true">📋</div>
+        <h3>Propuesta clara</h3>
+        <p>Plan con costes exactos, tiempos y resultados esperados. Sin letra pequeña.</p>
+      </article>
+      <article class="pstep" aria-labelledby="pstep-03">
+        <div class="pstep-n" id="pstep-03">Paso — 03</div>
+        <div class="pstep-icon" aria-hidden="true">🛠️</div>
+        <h3>Implementación</h3>
+        <p>Integramos la IA en tus herramientas actuales. Tú solo tienes que aprobar.</p>
+      </article>
+      <article class="pstep" aria-labelledby="pstep-04">
+        <div class="pstep-n" id="pstep-04">Paso — 04</div>
+        <div class="pstep-icon" aria-hidden="true">🚀</div>
+        <h3>Soporte continuo</h3>
+        <p>Te enseñamos a sacarle partido y estamos contigo en todo momento.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTADOS -->
+<section id="resultados" aria-labelledby="resultados-titulo">
+  <div class="container">
+    <div class="rv" style="text-align:center">
+      <div class="tag" style="justify-content:center"><span class="tag-line"></span>Resultados<span class="tag-line"></span></div>
+      <h2 class="sec-title" id="resultados-titulo" style="text-align:center">Números que hablan solos</h2>
+    </div>
+    <div class="stats-row rv rv-d1">
+      <div class="stat-box"><div class="stat-n" data-target="73" data-prefix="+">+73%</div><div class="stat-l">Aumento en<br>productividad</div></div>
+      <div class="stat-box"><div class="stat-n" data-target="40" data-prefix="−">−40%</div><div class="stat-l">Reducción de<br>costes operativos</div></div>
+      <div class="stat-box"><div class="stat-n" data-target="3" data-suffix="×">3×</div><div class="stat-l">Más rápido en<br>atención al cliente</div></div>
+      <div class="stat-box"><div class="stat-n" data-target="97" data-suffix="%">97%</div><div class="stat-l">Clientes<br>satisfechos</div></div>
+    </div>
+    <div class="testi-grid">
+      <article class="tcard rv rv-d1" aria-labelledby="testi-01">
+        <div class="tcard-stars" aria-label="5 estrellas">★★★★★</div>
+        <p class="tcard-text" id="testi-01">"Desde que implementamos el chatbot, nuestro equipo tiene un 60% menos de consultas repetitivas. Se pagó sola en dos meses."</p>
+        <div class="tcard-author">
+          <div class="tcard-av" style="background:linear-gradient(135deg,#01FFC2,#0099FF)" aria-hidden="true">MC</div>
+          <div><div class="tcard-name">María C.</div><div class="tcard-role">Directora, Clínica Dental Valencia</div></div>
+        </div>
+      </article>
+      <article class="tcard rv rv-d2" aria-labelledby="testi-02">
+        <div class="tcard-stars" aria-label="5 estrellas">★★★★★</div>
+        <p class="tcard-text" id="testi-02">"Pensaba que la IA era solo para grandes empresas. En 3 semanas teníamos automatizados los informes y la gestión de pedidos. Increíble."</p>
+        <div class="tcard-author">
+          <div class="tcard-av" style="background:linear-gradient(135deg,#7B3FFF,#FF2D6B)" aria-hidden="true">JR</div>
+          <div><div class="tcard-name">Jorge R.</div><div class="tcard-role">Gerente, Distribuidora Norte</div></div>
+        </div>
+      </article>
+      <article class="tcard rv rv-d3" aria-labelledby="testi-03">
+        <div class="tcard-stars" aria-label="5 estrellas">★★★★★</div>
+        <p class="tcard-text" id="testi-03">"Muy fácil. Me explicaron todo sin tecnicismos y en dos semanas teníamos la IA funcionando. Las ventas subieron un 22%."</p>
+        <div class="tcard-author">
+          <div class="tcard-av" style="background:linear-gradient(135deg,#FF8C00,#FF2D6B)" aria-hidden="true">LP</div>
+          <div><div class="tcard-name">Laura P.</div><div class="tcard-role">Fundadora, ModaMediterránea</div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIOS -->
+<section id="precios" class="proc-bg" aria-labelledby="precios-titulo">
+  <div class="container">
+    <div class="rv" style="text-align:center">
+      <div class="tag" style="justify-content:center"><span class="tag-line"></span>Precios<span class="tag-line"></span></div>
+      <h2 class="sec-title" id="precios-titulo" style="text-align:center">Planes claros, sin sorpresas</h2>
+      <p class="sec-sub" style="margin:0 auto;text-align:center">Sin permanencia. Cancela cuando quieras.</p>
+    </div>
+    <div class="pricing-grid">
+      <article class="plan rv rv-d1" aria-labelledby="plan-starter">
+        <div class="plan-name" id="plan-starter">Starter</div>
+        <div class="plan-desc">Para negocios que dan sus primeros pasos con IA</div>
+        <div class="plan-price">€497<sub>/ mes</sub></div>
+        <div class="plan-freq">Sin permanencia mínima</div>
+        <ul class="plan-feats">
+          <li><span class="fc" aria-hidden="true">✓</span>1 solución de IA a elegir</li>
+          <li><span class="fc" aria-hidden="true">✓</span>Configuración e integración</li>
+          <li><span class="fc" aria-hidden="true">✓</span>Formación inicial (2h)</li>
+          <li><span class="fc" aria-hidden="true">✓</span>Soporte por email</li>
+          <li><span class="fc" aria-hidden="true">✓</span>Panel de seguimiento básico</li>
+        </ul>
+        <a href="#contacto" class="plan-btn out" aria-label="Contratar plan Starter">Empezar ahora</a>
+      </article>
+      <article class="plan hot rv rv-d2" aria-labelledby="plan-pro">
+        <div class="plan-chip">Más popular</div>
+        <div class="plan-name" id="plan-pro">Profesional</div>
+        <div class="plan-desc">Para empresas que quieren escalar con IA</div>
+        <div class="plan-price">€1.197<sub>/ mes</sub></div>
+        <div class="plan-freq">Sin permanencia mínima</div>
+        <ul class="plan-feats">
+          <li><span class="fc" aria-hidden="true">✓</span>Hasta 3 soluciones de IA</li>
+          <li><span class="fc" aria-hidden="true">✓</span>Integraciones avanzadas</li>
+          <li><span class="fc" aria-hidden="true">✓</span>Formación completa (8h)</li>
+          <li><span class="fc" aria-hidden="true">✓</span>Soporte prioritario (chat + tel.)</li>
+          <li><span class="fc" aria-hidden="true">✓</span>Panel de análisis avanzado</li>
+          <li><span class="fc" aria-hidden="true">✓</span>Reunión mensual de revisión</li>
+          <li><span class="fc" aria-hidden="true">✓</span>Actualizaciones incluidas</li>
+        </ul>
+        <a href="#contacto" class="plan-btn main" aria-label="Contratar plan Profesional">Empezar ahora</a>
+      </article>
+      <article class="plan rv rv-d3" aria-labelledby="plan-enterprise">
+        <div class="plan-name" id="plan-enterprise">Enterprise</div>
+        <div class="plan-desc">Solución 100% personalizada para tu empresa</div>
+        <div class="plan-price" style="font-size:2rem">A medida</div>
+        <div class="plan-freq">Presupuesto sin compromiso</div>
+        <ul class="plan-feats">
+          <li><span class="fc" aria-hidden="true">✓</span>IA 100% personalizada</li>
+          <li><span class="fc" aria-hidden="true">✓</span>Integraciones ilimitadas</li>
+          <li><span class="fc" aria-hidden="true">✓</span>Formación para todo el equipo</li>
+          <li><span class="fc" aria-hidden="true">✓</span>Account manager dedicado</li>
+          <li><span class="fc" aria-hidden="true">✓</span>SLA garantizado</li>
+          <li><span class="fc" aria-hidden="true">✓</span>Desarrollo de herramientas propias</li>
+          <li><span class="fc" aria-hidden="true">✓</span>Soporte 24/7</li>
+        </ul>
+        <a href="#contacto" class="plan-btn out" aria-label="Contactar para plan Enterprise">Contactar</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)" aria-labelledby="faq-titulo">
+  <div class="container">
+    <div class="rv" style="text-align:center">
+      <div class="tag" style="justify-content:center"><span class="tag-line"></span>FAQ<span class="tag-line"></span></div>
+      <h2 class="sec-title" id="faq-titulo" style="text-align:center">Preguntas frecuentes</h2>
+    </div>
+    <div class="faq-wrap rv rv-d1">
+      <div class="faq-row">
+        <button class="faq-q" onclick="tFaq(this)" aria-expanded="false">¿Necesito conocimientos técnicos? <span class="faq-ico" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-ai">No, en absoluto. Diseñamos todas las soluciones para usuarios no técnicos. Nos encargamos de todo y te formamos para que puedas gestionarlo sin problema.</div></div>
+      </div>
+      <div class="faq-row">
+        <button class="faq-q" onclick="tFaq(this)" aria-expanded="false">¿Cuánto tiempo tarda en estar funcionando? <span class="faq-ico" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-ai">La mayoría de soluciones están operativas en 1 a 3 semanas. Proyectos complejos pueden llevar hasta 6 semanas. Te damos un plazo real desde el primer día.</div></div>
+      </div>
+      <div class="faq-row">
+        <button class="faq-q" onclick="tFaq(this)" aria-expanded="false">¿Funciona con las herramientas que ya uso? <span class="faq-ico" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-ai">Sí. Integramos con WhatsApp, Shopify, WordPress, Salesforce, HubSpot, Google Workspace, Microsoft 365 y muchas más. Analizamos tu stack antes de empezar.</div></div>
+      </div>
+      <div class="faq-row">
+        <button class="faq-q" onclick="tFaq(this)" aria-expanded="false">¿Mis datos están seguros? <span class="faq-ico" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-ai">Sí. Cumplimos con el RGPD. Todos los datos se procesan en servidores europeos y firmamos un contrato de confidencialidad en cada proyecto.</div></div>
+      </div>
+      <div class="faq-row">
+        <button class="faq-q" onclick="tFaq(this)" aria-expanded="false">¿Hay permanencia mínima? <span class="faq-ico" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-ai">No. Puedes cancelar en cualquier momento con 30 días de aviso. Confiamos en nuestro trabajo, no en los contratos.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" aria-labelledby="contacto-titulo">
+  <div class="container">
+    <div class="tag rv"><span class="tag-line"></span>Contacto</div>
+    <div class="contact-grid">
+      <div class="contact-left rv">
+        <h2 id="contacto-titulo">Hablemos<br>sobre tu negocio</h2>
+        <p>Cuéntanos tu reto y te preparamos una propuesta gratuita y sin compromiso. Respondemos en menos de 24 horas.</p>
+        <div class="cinfo"><div class="cinfo-ico" aria-hidden="true">📧</div><span><strong>rubseroia@gmail.com</strong></span></div>
+        <div class="cinfo"><div class="cinfo-ico" aria-hidden="true">📱</div><span><strong>+34 633 57 11 56</strong> · WhatsApp disponible</span></div>
+        <div class="cinfo"><div class="cinfo-ico" aria-hidden="true">📍</div><span>Valencia, España · Atendemos toda España</span></div>
+        <div class="cinfo"><div class="cinfo-ico" aria-hidden="true">🕐</div><span>Lun–Vie · 9:00 – 18:00</span></div>
+      </div>
+      <div class="contact-form rv rv-d2">
+        <div class="form-row">
+          <div class="fg"><label for="fn">Nombre *</label><input type="text" id="fn" name="nombre" placeholder="Tu nombre" required autocomplete="name"></div>
+          <div class="fg"><label for="em">Email *</label><input type="email" id="em" name="email" placeholder="tu@empresa.com" required autocomplete="email"></div>
+        </div>
+        <div class="fg"><label for="co">Empresa</label><input type="text" id="co" name="empresa" placeholder="Nombre de tu empresa" autocomplete="organization"></div>
+        <div class="fg">
+          <label for="sv">Servicio de interés</label>
+          <select id="sv" name="servicio">
+            <option value="">Selecciona una opción...</option>
+            <option>Chatbot con IA para clientes</option>
+            <option>Análisis inteligente de datos</option>
+            <option>Automatización de tareas</option>
+            <option>Generación de contenido</option>
+            <option>IA para RRHH y selección</option>
+            <option>Estrategia de IA a medida</option>
+            <option>No lo sé, necesito asesoramiento</option>
+          </select>
+        </div>
+        <div class="fg"><label for="ms">Cuéntanos tu reto</label><textarea id="ms" name="mensaje" placeholder="¿Qué problema quieres resolver con IA?"></textarea></div>
+        <button class="submit-btn" onclick="sendForm()" type="button">Enviar y recibir consulta gratuita</button>
+        <div class="form-ok" id="fok" role="status" aria-live="polite">✅ ¡Recibido! Te contactamos en menos de 24 horas.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Rubsero<em>IA</em></div>
+    <ul class="footer-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#precios">Precios</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="#">Privacidad</a></li>
+    </ul>
+    <p class="footer-copy">© 2025 RubseroIA · Valencia, España</p>
+  </div>
+</footer>
+
+<!-- =========================================================
+     SCHEMA MARKUP JSON-LD — RubseroIA
+     ========================================================= -->
+
+<!-- Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "RubseroIA",
+  "url": "https://rubseroIA.com",
+  "logo": "https://rubseroIA.com/img/logo.png",
+  "description": "Consultoría e implementación de inteligencia artificial para empresas en España. Chatbots, automatización, análisis de datos y generación de contenido con IA.",
+  "foundingDate": "2025",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Valencia",
+    "addressRegion": "Valencia",
+    "addressCountry": "ES"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+34-633-571156",
+    "contactType": "customer service",
+    "availableLanguage": ["Spanish"],
+    "areaServed": "ES"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/rubseroia",
+    "https://twitter.com/rubseroia"
+  ]
+}
+</script>
+
+<!-- Service Catalog -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Consultoría e Implementación de Inteligencia Artificial",
+  "provider": {
+    "@type": "Organization",
+    "name": "RubseroIA",
+    "url": "https://rubseroIA.com"
+  },
+  "areaServed": {"@type": "Country", "name": "España"},
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios de IA para Empresas",
+    "itemListElement": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Chatbot con IA 24/7", "description": "Responde consultas, reservas y dudas en cualquier momento sin coste extra en personal."}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Análisis de datos con IA", "description": "Convierte números en decisiones con dashboards que cualquiera puede entender."}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Automatización de tareas", "description": "Elimina el trabajo repetitivo: facturas, correos, informes. La IA trabaja, tú decides."}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Generación de contenido con IA", "description": "Posts, newsletters y fichas de producto de calidad en minutos."}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "IA para RRHH y selección", "description": "Filtra CVs, agenda entrevistas y evalúa candidatos. Contrata mejor en menos tiempo."}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Estrategia de IA a medida", "description": "Análisis de tu negocio y diseño del plan de IA que más valor te aporta."}}
+    ]
+  }
+}
+</script>
+
+<!-- FAQ Page -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "¿Necesito conocimientos técnicos?", "acceptedAnswer": {"@type": "Answer", "text": "No, en absoluto. Diseñamos todas las soluciones para usuarios no técnicos. Nos encargamos de todo y te formamos para que puedas gestionarlo sin problema."}},
+    {"@type": "Question", "name": "¿Cuánto tiempo tarda en estar funcionando?", "acceptedAnswer": {"@type": "Answer", "text": "La mayoría de soluciones están operativas en 1 a 3 semanas. Proyectos complejos pueden llevar hasta 6 semanas. Te damos un plazo real desde el primer día."}},
+    {"@type": "Question", "name": "¿Funciona con las herramientas que ya uso?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Integramos con WhatsApp, Shopify, WordPress, Salesforce, HubSpot, Google Workspace, Microsoft 365 y muchas más. Analizamos tu stack antes de empezar."}},
+    {"@type": "Question", "name": "¿Mis datos están seguros?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Cumplimos con el RGPD. Todos los datos se procesan en servidores europeos y firmamos un contrato de confidencialidad en cada proyecto."}},
+    {"@type": "Question", "name": "¿Hay permanencia mínima?", "acceptedAnswer": {"@type": "Answer", "text": "No. Puedes cancelar en cualquier momento con 30 días de aviso. Confiamos en nuestro trabajo, no en los contratos."}}
+  ]
+}
+</script>
+
+<!-- LocalBusiness + Reviews -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "RubseroIA",
+  "image": "https://rubseroIA.com/img/logo.png",
+  "url": "https://rubseroIA.com",
+  "telephone": "+34-633-571156",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Valencia",
+    "addressRegion": "Valencia",
+    "addressCountry": "ES"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "3",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "priceRange": "€€",
+  "openingHours": "Mo-Fr 09:00-18:00"
+}
+</script>
+
+<!-- HowTo (Proceso) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Cómo implementar IA en tu empresa con RubseroIA",
+  "description": "Proceso de 4 pasos para integrar inteligencia artificial en tu negocio sin necesidad de conocimientos técnicos.",
+  "totalTime": "PT3W",
+  "step": [
+    {"@type": "HowToStep", "position": 1, "name": "Consulta gratis", "text": "Entendemos tu negocio y tus retos. Sin compromisos ni tecnicismos.", "url": "https://rubseroIA.com/#proceso"},
+    {"@type": "HowToStep", "position": 2, "name": "Propuesta clara", "text": "Plan con costes exactos, tiempos y resultados esperados. Sin letra pequeña.", "url": "https://rubseroIA.com/#proceso"},
+    {"@type": "HowToStep", "position": 3, "name": "Implementación", "text": "Integramos la IA en tus herramientas actuales. Tú solo tienes que aprobar.", "url": "https://rubseroIA.com/#proceso"},
+    {"@type": "HowToStep", "position": 4, "name": "Soporte continuo", "text": "Te enseñamos a sacarle partido y estamos contigo en todo momento.", "url": "https://rubseroIA.com/#proceso"}
+  ]
+}
+</script>
+
+<script>
+/* CURSOR */
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,.svc,.plan,.tcard').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='20px';cur.style.height='20px';ring.style.width='54px';ring.style.height='54px'});
+  el.addEventListener('mouseleave',()=>{cur.style.width='12px';cur.style.height='12px';ring.style.width='36px';ring.style.height='36px'});
+});
+
+/* PARTICLE CANVAS */
+const cvs=document.getElementById('bg-canvas'),ctx=cvs.getContext('2d');
+let W,H,pts=[];
+function resize(){W=cvs.width=innerWidth;H=cvs.height=innerHeight;pts=[];for(let i=0;i<80;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:Math.random()*1.4+.3})}
+function frame(){
+  ctx.clearRect(0,0,W,H);
+  pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(1,255,194,.32)';ctx.fill()});
+  pts.forEach((a,i)=>{for(let j=i+1;j<pts.length;j++){const b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<120){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=`rgba(1,255,194,${.07*(1-d/120)})`;ctx.lineWidth=.5;ctx.stroke()}}});
+  requestAnimationFrame(frame);
+}
+resize();addEventListener('resize',resize);frame();
+
+/* SVC GLOW */
+document.querySelectorAll('.svc').forEach(c=>c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');c.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%')}));
+
+/* SCROLL REVEAL */
+const ro=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*70);ro.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+
+/* COUNTER */
+const so=new IntersectionObserver(entries=>{if(entries[0].isIntersecting){
+  document.querySelectorAll('.stat-n').forEach((el,i)=>{
+    const t=parseInt(el.dataset.target),pre=el.dataset.prefix||'',suf=el.dataset.suffix||'%';
+    let t0=null;
+    setTimeout(()=>{(function anim(ts){if(!t0)t0=ts;const p=Math.min((ts-t0)/1600,1),e2=1-Math.pow(1-p,4);el.textContent=pre+Math.round(e2*t)+suf;if(p<1)requestAnimationFrame(anim)})(performance.now())},i*140);
+  });so.disconnect()}},{threshold:.6});
+const sr=document.querySelector('.stats-row');if(sr)so.observe(sr);
+
+/* FAQ */
+function tFaq(btn){
+  const row=btn.parentElement,was=row.classList.contains('open');
+  document.querySelectorAll('.faq-row').forEach(r=>{r.classList.remove('open');r.querySelector('.faq-q').setAttribute('aria-expanded','false')});
+  if(!was){row.classList.add('open');btn.setAttribute('aria-expanded','true');}
+}
+
+/* FORM */
+function sendForm(){
+  const n=document.getElementById('fn').value.trim(),e=document.getElementById('em').value.trim();
+  if(!n||!e){alert('Por favor, rellena nombre y email.');return}
+  const btn=document.querySelector('.submit-btn');
+  btn.disabled=true;btn.textContent='Enviando...';
+  setTimeout(()=>{btn.textContent='✓ Enviado';document.getElementById('fok').style.display='block'},900);
+}
+
+/* MOBILE NAV */
+function toggleNav(){
+  const nl=document.getElementById('nav-ul'),btn=document.querySelector('.hamburger'),open=nl.style.display==='flex';
+  nl.style.cssText=open?'':'display:flex;flex-direction:column;position:absolute;top:58px;left:0;right:0;background:rgba(4,6,15,.97);padding:1.5rem 2rem;gap:1.2rem;border-bottom:1px solid rgba(255,255,255,.07);z-index:199';
+  btn.setAttribute('aria-expanded',open?'false':'true');
+}
+</script>
+</body>
+</html>
