@@ -1,159 +1,84 @@
 /* =========================================================
    RubseroIA — Google Analytics 4 Tracking
-   Reemplaza G-XXXXXXXXXX con tu Measurement ID real
+   El Measurement ID y la carga de gtag.js viven en el <head> de
+   index.html. Este archivo solo define los eventos de conversión.
    ========================================================= */
 
-// Configuración GA4
-gtag('config', 'G-XXXXXXXXXX', {
-  page_title: document.title,
-  page_location: window.location.href,
-  send_page_view: true,
-  custom_map: {
-    'custom_parameter_1': 'service_interest'
-  }
-});
-
-// =========================================================
-// EVENTOS DE CONVERSIÓN
-// =========================================================
-
-document.addEventListener('DOMContentLoaded', function() {
-
-  // 1. Click en CTA principal "Consulta gratuita"
-  const ctaMain = document.querySelector('.cta-main');
-  if (ctaMain) {
-    ctaMain.addEventListener('click', function() {
-      gtag('event', 'click_cta_consulta', {
-        event_category: 'conversion',
-        event_label: 'Hero - Consulta gratuita',
-        value: 1
-      });
+document.addEventListener("DOMContentLoaded", function () {
+  // ---------- Eventos por clic (data-event en el HTML) ----------
+  // Elementos marcados con [data-event] en index.html:
+  //   cta_hero_click, cta_hero_secondary, cta_nav_click,
+  //   cta_pricing_starter, cta_pricing_pro, cta_pricing_enterprise,
+  //   cta_whatsapp_click, cta_email_click
+  document.querySelectorAll("[data-event]").forEach(function (el) {
+    el.addEventListener("click", function () {
+      var eventName = el.getAttribute("data-event");
+      if (typeof gtag === "function") {
+        gtag("event", eventName, {
+          event_category: "conversion",
+          event_label: el.textContent.trim()
+        });
+      } else {
+        console.log("[tracking] " + eventName + " (GA4 aún no instalado)");
+      }
     });
-  }
+  });
 
-  // 2. Click en "Ver qué hacemos"
-  const ctaGhost = document.querySelector('.cta-ghost');
-  if (ctaGhost) {
-    ctaGhost.addEventListener('click', function() {
-      gtag('event', 'click_cta_servicios', {
-        event_category: 'engagement',
-        event_label: 'Hero - Ver servicios',
-        value: 1
-      });
-    });
-  }
-
-  // 3. Click en plan Starter
-  const planStarter = document.querySelector('[aria-label="Contratar plan Starter"]');
-  if (planStarter) {
-    planStarter.addEventListener('click', function() {
-      gtag('event', 'click_plan_starter', {
-        event_category: 'conversion',
-        event_label: 'Plan Starter',
-        value: 497
-      });
-    });
-  }
-
-  // 4. Click en plan Profesional (más popular)
-  const planPro = document.querySelector('[aria-label="Contratar plan Profesional"]');
-  if (planPro) {
-    planPro.addEventListener('click', function() {
-      gtag('event', 'click_plan_profesional', {
-        event_category: 'conversion',
-        event_label: 'Plan Profesional',
-        value: 1197
-      });
-    });
-  }
-
-  // 5. Click en plan Enterprise
-  const planEnterprise = document.querySelector('[aria-label="Contactar para plan Enterprise"]');
-  if (planEnterprise) {
-    planEnterprise.addEventListener('click', function() {
-      gtag('event', 'click_plan_enterprise', {
-        event_category: 'conversion',
-        event_label: 'Plan Enterprise',
-        value: 0
-      });
-    });
-  }
-
-  // 6. Envío del formulario de contacto
-  const submitBtn = document.querySelector('.submit-btn');
-  if (submitBtn) {
-    submitBtn.addEventListener('click', function() {
-      const servicio = document.getElementById('sv')?.value || 'No especificado';
-      gtag('event', 'formulario_contacto', {
-        event_category: 'conversion',
-        event_label: 'Formulario enviado',
-        service_interest: servicio,
-        value: 1
-      });
-    });
-  }
-
-  // 7. Scroll hasta sección de precios (intención de compra)
-  let pricingViewed = false;
-  const pricingSection = document.getElementById('precios');
-  if (pricingSection) {
-    const pricingObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !pricingViewed) {
-          pricingViewed = true;
-          gtag('event', 'view_pricing', {
-            event_category: 'engagement',
-            event_label: 'Usuario vio precios',
-            value: 1
-          });
-        }
-      });
-    }, { threshold: 0.5 });
+  // ---------- Vista de la sección de precios (intención de compra) ----------
+  var pricingSection = document.getElementById("precios");
+  if (pricingSection && "IntersectionObserver" in window) {
+    var pricingViewed = false;
+    var pricingObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !pricingViewed) {
+            pricingViewed = true;
+            if (typeof gtag === "function") {
+              gtag("event", "view_pricing", {
+                event_category: "engagement",
+                event_label: "Usuario vio precios"
+              });
+            }
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
     pricingObserver.observe(pricingSection);
   }
 
-  // 8. Scroll hasta sección de contacto (alta intención)
-  let contactViewed = false;
-  const contactSection = document.getElementById('contacto');
-  if (contactSection) {
-    const contactObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !contactViewed) {
-          contactViewed = true;
-          gtag('event', 'view_contact', {
-            event_category: 'engagement',
-            event_label: 'Usuario vio contacto',
-            value: 1
-          });
-        }
-      });
-    }, { threshold: 0.5 });
+  // ---------- Vista de la sección de contacto (alta intención) ----------
+  var contactSection = document.getElementById("contacto");
+  if (contactSection && "IntersectionObserver" in window) {
+    var contactViewed = false;
+    var contactObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !contactViewed) {
+            contactViewed = true;
+            if (typeof gtag === "function") {
+              gtag("event", "view_contact", {
+                event_category: "engagement",
+                event_label: "Usuario vio contacto"
+              });
+            }
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
     contactObserver.observe(contactSection);
   }
 
-  // 9. Tiempo en página (engagement)
-  setTimeout(() => {
-    gtag('event', 'time_on_page_30s', {
-      event_category: 'engagement',
-      event_label: '30 segundos en página',
-      value: 1
-    });
-  }, 30000);
-
-  setTimeout(() => {
-    gtag('event', 'time_on_page_60s', {
-      event_category: 'engagement',
-      event_label: '60 segundos en página',
-      value: 1
-    });
-  }, 60000);
-
-  setTimeout(() => {
-    gtag('event', 'time_on_page_120s', {
-      event_category: 'engagement',
-      event_label: '120 segundos en página',
-      value: 1
-    });
-  }, 120000);
-
+  // ---------- Tiempo en página (engagement) ----------
+  [30, 60, 120].forEach(function (seconds) {
+    setTimeout(function () {
+      if (typeof gtag === "function") {
+        gtag("event", "time_on_page_" + seconds + "s", {
+          event_category: "engagement",
+          event_label: seconds + " segundos en página"
+        });
+      }
+    }, seconds * 1000);
+  });
 });

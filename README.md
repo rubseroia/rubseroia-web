@@ -99,33 +99,17 @@ Añade estos registros DNS:
 4. Ve a **Sitemaps** → Añade `sitemap.xml`
 
 ### 7. Google Analytics 4
+El script de GA4 ya está incluido en el `<head>` de `index.html` (con placeholder `G-XXXXXXXXXX`) y `src/assets/js/analytics.js` ya define los eventos de conversión. Solo falta:
 1. Ve a [analytics.google.com](https://analytics.google.com)
 2. Crea propiedad para `rubseroIA.com`
 3. Copia el Measurement ID (ej: `G-XXXXXXXXXX`)
-4. Reemplaza `G-XXXXXXXXXX` en `src/assets/js/analytics.js`
-5. Añade el script de GA4 en el `<head>` de `index.html`:
-```html
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-</script>
-```
+4. Sustituye las dos apariciones de `G-XXXXXXXXXX` en `src/index.html`
 
 ---
 
 ## 📸 Imágenes necesarias
 
-Sube estas imágenes a `src/assets/img/`:
-
-| Archivo | Tamaño | Uso |
-|---------|--------|-----|
-| `og-image.jpg` | 1200×630 px | Compartir en redes sociales |
-| `icon-192.png` | 192×192 px | Icono PWA |
-| `icon-512.png` | 512×512 px | Icono PWA |
-| `logo.png` | 200×200 px | Schema markup / Google Business |
+✅ Ya generadas en `src/assets/img/` (favicon.svg, og-image.jpg, icon-192.png, icon-512.png, logo.png). Son un diseño propio (monograma "R"); sustituibles más adelante si se define un logo definitivo.
 
 **Generadores gratuitos:**
 - [favicon.io](https://favicon.io) — Iconos PWA

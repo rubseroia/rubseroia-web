@@ -153,19 +153,21 @@ rubseroia-project/
 
 ## ⚠️ TAREAS PENDIENTES
 
+_(Actualizado: rediseño completo de index.html/main.css/main.js/analytics.js ya subido y con el build de GitHub Actions verificado localmente — ver commit correspondiente.)_
+
 ### 🔴 Urgentes (requieren acceso al servidor/hosting)
-- [ ] Crear imagen OG 1200×630 px
-- [ ] Crear iconos PWA 192×192 y 512×512
-- [ ] Subir todo a GitHub Pages / hosting
-- [ ] Configurar DNS (registros A + CNAME)
-- [ ] Configurar Cloudflare (SSL + CDN)
-- [ ] Registrar Google Search Console
-- [ ] Instalar Google Analytics 4 (reemplazar G-XXXXXXXXXX)
-- [ ] Crear Google Business Profile
+- [x] Crear imagen OG 1200×630 px (`og-image.jpg`)
+- [x] Crear iconos PWA 192×192 y 512×512
+- [ ] Subir todo a GitHub Pages (`Settings → Pages → Source: GitHub Actions`, dominio personalizado ya soportado por `deploy.yml`)
+- [ ] Configurar DNS (registros A + CNAME) en el registrador del dominio
+- [ ] (Opcional) Configurar Cloudflare (SSL + CDN) — no imprescindible, GitHub Pages ya sirve HTTPS propio
+- [ ] Registrar Google Search Console y sustituir `CONTENT-A-RELLENAR` en `index.html`
+- [ ] Instalar Google Analytics 4 (reemplazar `G-XXXXXXXXXX` en `index.html`)
+- [x] Google Business Profile (creado, pendiente de verificación de Google)
 
 ### 🟡 Importantes
-- [ ] Extraer JS de index.html a main.js externo
-- [ ] Configurar Formspree/Netlify Forms para el formulario real
+- [x] Extraer JS de index.html a main.js externo (ya está en `main.js` + `analytics.js`, referenciados correctamente)
+- [ ] Configurar Formspree/Netlify Forms para el formulario real (la web actual usa WhatsApp/email directos, no formulario)
 - [ ] Añadir banner de cookies RGPD
 - [ ] Crear primer post de blog
 - [ ] Crear primer caso de éxito

@@ -1,180 +1,151 @@
-/* =========================================================
-   RubseroIA — Main JavaScript
-   Cursor, partículas, animaciones, FAQ, formulario, nav
-   ========================================================= */
+// ============================================
+// RubseroIA — main.js
+// Menú móvil, FAQ acordeón, año dinámico, animaciones y microinteracciones.
+// El tracking de GA4 vive en analytics.js (archivo aparte).
+// ============================================
 
-/* CURSOR PERSONALIZADO */
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener("DOMContentLoaded", function () {
+  // Año en el footer
+  var yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-document.addEventListener('mousemove', e => {
-  mx = e.clientX;
-  my = e.clientY;
-  cur.style.left = mx + 'px';
-  cur.style.top = my + 'px';
-});
-
-(function loop() {
-  rx += (mx - rx) * .13;
-  ry += (my - ry) * .13;
-  ring.style.left = rx + 'px';
-  ring.style.top = ry + 'px';
-  requestAnimationFrame(loop);
-})();
-
-document.querySelectorAll('a, button, .svc, .plan, .tcard').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    cur.style.width = '20px';
-    cur.style.height = '20px';
-    ring.style.width = '54px';
-    ring.style.height = '54px';
-  });
-  el.addEventListener('mouseleave', () => {
-    cur.style.width = '12px';
-    cur.style.height = '12px';
-    ring.style.width = '36px';
-    ring.style.height = '36px';
-  });
-});
-
-/* PARTICLE CANVAS */
-const cvs = document.getElementById('bg-canvas');
-const ctx = cvs.getContext('2d');
-let W, H, pts = [];
-
-function resize() {
-  W = cvs.width = innerWidth;
-  H = cvs.height = innerHeight;
-  pts = [];
-  for (let i = 0; i < 80; i++) {
-    pts.push({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      vx: (Math.random() - .5) * .22,
-      vy: (Math.random() - .5) * .22,
-      r: Math.random() * 1.4 + .3
+  // Menú móvil
+  var navToggle = document.getElementById("navToggle");
+  var navLinks = document.getElementById("navLinks");
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", function () {
+      navLinks.classList.toggle("open");
+    });
+    navLinks.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navLinks.classList.remove("open");
+      });
     });
   }
-}
 
-function frame() {
-  ctx.clearRect(0, 0, W, H);
-  pts.forEach(p => {
-    p.x += p.vx;
-    p.y += p.vy;
-    if (p.x < 0) p.x = W;
-    if (p.x > W) p.x = 0;
-    if (p.y < 0) p.y = H;
-    if (p.y > H) p.y = 0;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(1,255,194,.32)';
-    ctx.fill();
-  });
-  pts.forEach((a, i) => {
-    for (let j = i + 1; j < pts.length; j++) {
-      const b = pts[j];
-      const d = Math.hypot(a.x - b.x, a.y - b.y);
-      if (d < 120) {
-        ctx.beginPath();
-        ctx.moveTo(a.x, a.y);
-        ctx.lineTo(b.x, b.y);
-        ctx.strokeStyle = `rgba(1,255,194,${.07 * (1 - d / 120)})`;
-        ctx.lineWidth = .5;
-        ctx.stroke();
+  // FAQ acordeón
+  document.querySelectorAll(".faq-item").forEach(function (item) {
+    var question = item.querySelector(".faq-question");
+    var answer = item.querySelector(".faq-answer");
+    question.addEventListener("click", function () {
+      var isOpen = item.classList.contains("open");
+
+      document.querySelectorAll(".faq-item.open").forEach(function (openItem) {
+        if (openItem !== item) {
+          openItem.classList.remove("open");
+          openItem.querySelector(".faq-answer").style.maxHeight = null;
+        }
+      });
+
+      if (isOpen) {
+        item.classList.remove("open");
+        answer.style.maxHeight = null;
+      } else {
+        item.classList.add("open");
+        answer.style.maxHeight = answer.scrollHeight + "px";
       }
-    }
-  });
-  requestAnimationFrame(frame);
-}
-
-resize();
-addEventListener('resize', resize);
-frame();
-
-/* SVC GLOW EFFECT */
-document.querySelectorAll('.svc').forEach(c => {
-  c.addEventListener('mousemove', e => {
-    const r = c.getBoundingClientRect();
-    c.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-    c.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
-  });
-});
-
-/* SCROLL REVEAL */
-const ro = new IntersectionObserver(entries => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('in'), i * 70);
-      ro.unobserve(e.target);
-    }
-  });
-}, { threshold: .1 });
-
-document.querySelectorAll('.rv').forEach(el => ro.observe(el));
-
-/* COUNTER ANIMATION */
-const so = new IntersectionObserver(entries => {
-  if (entries[0].isIntersecting) {
-    document.querySelectorAll('.stat-n').forEach((el, i) => {
-      const t = parseInt(el.dataset.target);
-      const pre = el.dataset.prefix || '';
-      const suf = el.dataset.suffix || '%';
-      let t0 = null;
-      setTimeout(() => {
-        (function anim(ts) {
-          if (!t0) t0 = ts;
-          const p = Math.min((ts - t0) / 1600, 1);
-          const e2 = 1 - Math.pow(1 - p, 4);
-          el.textContent = pre + Math.round(e2 * t) + suf;
-          if (p < 1) requestAnimationFrame(anim);
-        })(performance.now());
-      }, i * 140);
     });
-    so.disconnect();
-  }
-}, { threshold: .6 });
-
-const sr = document.querySelector('.stats-row');
-if (sr) so.observe(sr);
-
-/* FAQ ACCORDION */
-function tFaq(btn) {
-  const row = btn.parentElement;
-  const was = row.classList.contains('open');
-  document.querySelectorAll('.faq-row').forEach(r => {
-    r.classList.remove('open');
-    r.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
   });
-  if (!was) {
-    row.classList.add('open');
-    btn.setAttribute('aria-expanded', 'true');
-  }
-}
 
-/* FORM */
-function sendForm() {
-  const n = document.getElementById('fn').value.trim();
-  const e = document.getElementById('em').value.trim();
-  if (!n || !e) {
-    alert('Por favor, rellena nombre y email.');
-    return;
+  // Marquee: duplicar contenido si hace falta para loop continuo en pantallas anchas
+  var marquee = document.getElementById("marquee");
+  if (marquee && marquee.scrollWidth < window.innerWidth * 2) {
+    marquee.innerHTML += marquee.innerHTML;
   }
-  const btn = document.querySelector('.submit-btn');
-  btn.disabled = true;
-  btn.textContent = 'Enviando...';
-  setTimeout(() => {
-    btn.textContent = '✓ Enviado';
-    document.getElementById('fok').style.display = 'block';
-  }, 900);
-}
 
-/* MOBILE NAV */
-function toggleNav() {
-  const nl = document.getElementById('nav-ul');
-  const btn = document.querySelector('.hamburger');
-  const open = nl.style.display === 'flex';
-  nl.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:absolute;top:58px;left:0;right:0;background:rgba(4,6,15,.97);padding:1.5rem 2rem;gap:1.2rem;border-bottom:1px solid rgba(255,255,255,.07);z-index:199';
-  btn.setAttribute('aria-expanded', open ? 'false' : 'true');
-}
+  // ---------- Scroll reveal ----------
+  var revealEls = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && revealEls.length) {
+    var revealObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+    );
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add("visible"); });
+  }
+
+  // ---------- Barra de progreso de scroll ----------
+  var navProgress = document.getElementById("navProgress");
+  if (navProgress) {
+    var updateProgress = function () {
+      var h = document.documentElement;
+      var scrolled = h.scrollTop;
+      var max = h.scrollHeight - h.clientHeight;
+      var pct = max > 0 ? (scrolled / max) * 100 : 0;
+      navProgress.style.width = pct + "%";
+    };
+    document.addEventListener("scroll", updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  // ---------- Spotlight del hero siguiendo el ratón ----------
+  var hero = document.getElementById("top");
+  var spotlight = document.getElementById("heroSpotlight");
+  if (hero && spotlight && window.matchMedia("(hover: hover)").matches) {
+    hero.addEventListener("mousemove", function (e) {
+      var rect = hero.getBoundingClientRect();
+      var mx = ((e.clientX - rect.left) / rect.width) * 100;
+      var my = ((e.clientY - rect.top) / rect.height) * 100;
+      spotlight.style.setProperty("--mx", mx + "%");
+      spotlight.style.setProperty("--my", my + "%");
+    });
+  }
+
+  // ---------- Tilt 3D en tarjetas ----------
+  if (window.matchMedia("(hover: hover)").matches) {
+    document.querySelectorAll(".tilt").forEach(function (card) {
+      var rect;
+      card.addEventListener("mouseenter", function () {
+        rect = card.getBoundingClientRect();
+      });
+      card.addEventListener("mousemove", function (e) {
+        if (!rect) rect = card.getBoundingClientRect();
+        var px = (e.clientX - rect.left) / rect.width - 0.5;
+        var py = (e.clientY - rect.top) / rect.height - 0.5;
+        var rotateY = px * 8;
+        var rotateX = py * -8;
+        card.style.transform = "perspective(700px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) translateY(-3px)";
+      });
+      card.addEventListener("mouseleave", function () {
+        card.style.transform = "";
+      });
+    });
+  }
+
+  // ---------- Contador animado ----------
+  var counters = document.querySelectorAll("[data-count-to]");
+  if (counters.length && "IntersectionObserver" in window) {
+    var counterObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          var target = parseInt(el.getAttribute("data-count-to"), 10);
+          var suffix = el.textContent.replace(/[0-9]/g, "");
+          var start = 0;
+          var duration = 1100;
+          var startTime = null;
+          function step(ts) {
+            if (!startTime) startTime = ts;
+            var progress = Math.min((ts - startTime) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(eased * target) + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+          counterObserver.unobserve(el);
+        });
+      },
+      { threshold: 0.6 }
+    );
+    counters.forEach(function (el) { counterObserver.observe(el); });
+  }
+});
