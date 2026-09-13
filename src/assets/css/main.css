@@ -207,11 +207,12 @@ h3 {
 .nav-links a {
   font-size: 14px;
   color: var(--text-muted);
-  transition: color 0.15s ease;
+  transition: color 0.15s ease, transform 0.3s cubic-bezier(.16,1,.3,1);
 }
 
 .nav-links a:hover {
   color: var(--text);
+  transform: translateX(3px);
 }
 
 .nav-cta {
