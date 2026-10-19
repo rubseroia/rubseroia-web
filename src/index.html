@@ -26,14 +26,41 @@
 <!-- Google Search Console: sustituir CONTENT-A-RELLENAR por el código que te da Search Console al verificar la propiedad (Configuración > Verificación de propiedad > etiqueta HTML) -->
 <meta name="google-site-verification" content="CffWWr4hscvF-aK33Yqy9lLh757xBYilOSgGUwgqjpk" />
 
-<!-- Google Analytics 4: sustituir G-NLBFYRL25V por el Measurement ID real de tu propiedad GA4 (Admin > Flujos de datos > tu flujo web) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NLBFYRL25V"></script>
+<!-- Google Analytics 4 SOLO tras consentimiento (AEPD / art. 22.2 LSSI). Antes de aceptar no se carga nada de Google. -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-NLBFYRL25V');
+  (function () {
+    var KEY = 'rubseroia_cookies_v1', GA = 'G-NLBFYRL25V';
+    function cargarGA() {
+      if (window.__gaCargado) return; window.__gaCargado = true;
+      var s = document.createElement('script'); s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA;
+      document.head.appendChild(s);
+      gtag('js', new Date()); gtag('config', GA, { anonymize_ip: true });
+    }
+    function leer() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function guardar(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+    window.rubseroiaCookies = {
+      aceptar: function () { guardar('aceptadas'); ocultar(); cargarGA(); },
+      rechazar: function () { guardar('rechazadas'); ocultar(); },
+      configurar: function () { var b = document.getElementById('cookie-banner'); if (b) b.hidden = false; }
+    };
+    function ocultar() { var b = document.getElementById('cookie-banner'); if (b) b.hidden = true; }
+    if (leer() === 'aceptadas') cargarGA();
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!leer()) window.rubseroiaCookies.configurar();
+    });
+  })();
 </script>
+<style>
+  #cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;max-width:640px;margin:0 auto;background:#0d1124;color:#eef1fb;border:1px solid #1c2138;border-radius:14px;padding:18px 20px;box-shadow:0 10px 40px rgba(0,0,0,.5);font:14px/1.5 Inter,-apple-system,sans-serif}
+  #cookie-banner[hidden]{display:none}
+  #cookie-banner p{margin:0 0 14px;color:#9aa2c0}
+  #cookie-banner a{color:#01ffc2}
+  #cookie-banner .cb-btns{display:flex;gap:10px;flex-wrap:wrap}
+  #cookie-banner button{flex:1 1 140px;padding:10px 14px;border-radius:8px;font:600 14px Inter,sans-serif;cursor:pointer;border:1px solid #01ffc2;background:transparent;color:#eef1fb}
+</style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -321,13 +348,24 @@
   <div class="container footer-grid">
     <a href="#top" class="nav-logo">Rubsero<span>IA</span></a>
     <div class="footer-links">
+      <a href="/privacidad/aviso-legal.html">Aviso legal</a>
       <a href="/privacidad/">Privacidad</a>
+      <a href="/privacidad/#cookies">Cookies</a>
+      <a href="#" onclick="rubseroiaCookies.configurar();return false;">Configurar cookies</a>
       <a href="/blog/">Blog</a>
       <a href="/casos-exito/">Casos de éxito</a>
     </div>
     <p class="footer-copy">© <span id="year"></span> RubseroIA · Valencia, España</p>
   </div>
 </footer>
+
+<div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Aviso de cookies" hidden>
+  <p>Usamos cookies analíticas de Google Analytics para saber cuánta gente visita la web y mejorarla. Solo se activan si las aceptas. Más información en la <a href="/privacidad/#cookies">política de cookies</a>.</p>
+  <div class="cb-btns">
+    <button type="button" onclick="rubseroiaCookies.rechazar()">Rechazar</button>
+    <button type="button" onclick="rubseroiaCookies.aceptar()">Aceptar</button>
+  </div>
+</div>
 
 <script src="/assets/js/main.min.js"></script>
 <script src="/assets/js/analytics.min.js"></script>
